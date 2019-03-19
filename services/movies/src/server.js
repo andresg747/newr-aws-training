@@ -1,8 +1,7 @@
-// const newrelic = require('newrelic');
+const newrelic = require('newrelic');
 const app = require('./app');
 const debug = require('debug')('server:server');
 const http = require('http');
-
 
 function normalizePort(val) {
   const port = parseInt(val, 10);
