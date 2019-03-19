@@ -170,7 +170,7 @@ kubectl apply -f manifests/movies-db-service.yaml
 kubectl apply -f manifests/users-service-deployment.yaml
 kubectl apply -f manifests/users-service-service.yaml
 
-export YOUR_USERS_SERVICE_URL="http://$(
+export YOUR_USERS_SERVICE_URL="$(
 aws elb describe-load-balancers --output=text \
   --query 'LoadBalancerDescriptions[?ListenerDescriptions[0].Listener.LoadBalancerPort == `3002`].DNSName'
 ):3002"
@@ -184,7 +184,7 @@ sed -i -e "s/localhost:3002/${YOUR_USERS_SERVICE_URL}/g" manifests/movies-servic
 kubectl apply -f manifests/movies-service-deployment.yaml
 kubectl apply -f manifests/movies-service-service.yaml
 
-export YOUR_MOVIES_SERVICE_URL="http://$(
+export YOUR_MOVIES_SERVICE_URL="$(
 aws elb describe-load-balancers --output=text \
   --query 'LoadBalancerDescriptions[?ListenerDescriptions[0].Listener.LoadBalancerPort == `3004`].DNSName'
 ):3004"
@@ -199,7 +199,7 @@ sed -i -e "s/localhost:3004/${YOUR_MOVIES_SERVICE_URL}/g" manifests/web-service-
 kubectl apply -f manifests/web-service-deployment.yaml
 kubectl apply -f manifests/web-service-service.yaml
 
-export YOUR_MOVIES_SERVICE_URL="http://$(
+export YOUR_MOVIES_SERVICE_URL="$(
 aws elb describe-load-balancers --output=text \
   --query 'LoadBalancerDescriptions[?ListenerDescriptions[0].Listener.LoadBalancerPort == `4000`].DNSName'
 ):4000"
